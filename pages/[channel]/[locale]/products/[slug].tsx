@@ -32,13 +32,12 @@ import {
 export type OptionalQuery = {
   variant?: string;
 };
-export const getStaticPaths: GetStaticPaths = async () =>
-  // Temporally do not render all possible products during the build time
-  // const paths = await productPaths();
-  ({
-    paths: [],
-    fallback: "blocking",
-  });
+
+export const getStaticPaths: GetStaticPaths = async () => ({
+  paths: [],
+  fallback: "blocking",
+});
+
 export const getStaticProps = async (context: GetStaticPropsContext) => {
   const productSlug = context.params?.slug?.toString()!;
   const response: ApolloQueryResult<ProductBySlugQuery> = await apolloClient.query<
@@ -112,7 +111,7 @@ function ProductPage({ product }: InferGetStaticPropsType<typeof getStaticProps>
       // Theres no checkout, we have to create one
       const { data: createCheckoutData } = await createCheckout({
         variables: {
-          email: user?.email || "anonymous@example.com",
+          email: user?.email,
           channel: currentChannel.slug,
           lines: [
             {
@@ -157,7 +156,7 @@ function ProductPage({ product }: InferGetStaticPropsType<typeof getStaticProps>
       <ProductPageSeo product={product} />
       <main
         className={clsx(
-          "grid grid-cols-1 gap-4 max-h-full overflow-auto md:overflow-hidden max-w-7xl mx-auto pt-8 px-8 md:grid-cols-3"
+          "grid grid-cols-1 gap-4 max-h-full overflow-auto md:overflow-hidden container pt-8 px-8 md:grid-cols-3"
         )}
       >
         <div className="col-span-2">
@@ -189,7 +188,7 @@ function ProductPage({ product }: InferGetStaticPropsType<typeof getStaticProps>
             type="submit"
             disabled={isAddToCartButtonDisabled}
             className={clsx(
-              "w-full bg-blue-600 border border-transparent rounded-md py-3 px-8 flex items-center justify-center text-white hover:bg-blue-700 focus:outline-none",
+              "w-full bg-blue-600 border border-transparent rounded-md py-3 px-8 flex items-center justify-center text-md text-white hover:bg-blue-700 focus:outline-none",
               isAddToCartButtonDisabled && "bg-gray-400 hover:bg-gray-400"
             )}
           >

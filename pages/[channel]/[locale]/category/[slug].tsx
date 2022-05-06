@@ -7,7 +7,6 @@ import { Layout, PageHero, ProductCollection } from "@/components";
 import { CategoryPageSeo } from "@/components/seo/CategoryPageSeo";
 import apolloClient from "@/lib/graphql";
 import { contextToRegionQuery } from "@/lib/regions";
-import { categoryPaths } from "@/lib/ssr/category";
 import {
   CategoryBySlugDocument,
   CategoryBySlugQuery,
@@ -41,12 +40,12 @@ function CategoryPage({ category }: InferGetStaticPropsType<typeof getStaticProp
     <>
       <CategoryPageSeo category={category} />
       <header className="mb-4 pt-4">
-        <div className="max-w-7xl mx-auto px-8">
+        <div className="container px-8">
           <PageHero entity={category} />
         </div>
       </header>
       <main>
-        <div className="max-w-7xl mx-auto px-8">
+        <div className="container px-8">
           <ProductCollection filter={{ categories: [category?.id] }} />
         </div>
       </main>
@@ -56,13 +55,10 @@ function CategoryPage({ category }: InferGetStaticPropsType<typeof getStaticProp
 
 export default CategoryPage;
 
-export const getStaticPaths: GetStaticPaths = async () => {
-  const paths = await categoryPaths();
-  return {
-    paths,
-    fallback: "blocking",
-  };
-};
+export const getStaticPaths: GetStaticPaths = () => ({
+  paths: [],
+  fallback: "blocking",
+});
 
 CategoryPage.getLayout = function getLayout(page: ReactElement) {
   return <Layout>{page}</Layout>;

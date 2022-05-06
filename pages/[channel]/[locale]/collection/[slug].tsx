@@ -7,7 +7,6 @@ import { Layout, PageHero, ProductCollection } from "@/components";
 import { CollectionPageSeo } from "@/components/seo/CollectionPageSeo";
 import apolloClient from "@/lib/graphql";
 import { contextToRegionQuery } from "@/lib/regions";
-import { collectionPaths } from "@/lib/ssr/collection";
 import {
   CollectionBySlugDocument,
   CollectionBySlugQuery,
@@ -40,12 +39,12 @@ function CollectionPage({ collection }: InferGetStaticPropsType<typeof getStatic
     <>
       <CollectionPageSeo collection={collection} />
       <header className="mb-4 pt-4">
-        <div className="max-w-7xl mx-auto px-8">
+        <div className="container px-8">
           <PageHero entity={collection} />
         </div>
       </header>
       <main>
-        <div className="max-w-7xl mx-auto px-8">
+        <div className="container px-8">
           <ProductCollection filter={{ collections: [collection?.id] }} />
         </div>
       </main>
@@ -55,13 +54,10 @@ function CollectionPage({ collection }: InferGetStaticPropsType<typeof getStatic
 
 export default CollectionPage;
 
-export const getStaticPaths: GetStaticPaths = async () => {
-  const paths = await collectionPaths();
-  return {
-    paths,
-    fallback: "blocking",
-  };
-};
+export const getStaticPaths: GetStaticPaths = () => ({
+  paths: [],
+  fallback: "blocking",
+});
 
 CollectionPage.getLayout = function getLayout(page: ReactElement) {
   return <Layout>{page}</Layout>;
