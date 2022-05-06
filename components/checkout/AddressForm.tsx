@@ -40,7 +40,7 @@ export function AddressForm({
       lastName: existingAddressData?.lastName || "",
       phone: existingAddressData?.phone || "",
       country: "AE",
-      countryArea: "RK",
+      countryArea: "أبو ظبي",
       streetAddress1: existingAddressData?.streetAddress1 || "",
       city: existingAddressData?.city || "",
       postalCode: existingAddressData?.postalCode || "",
