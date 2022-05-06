@@ -8,7 +8,7 @@ export const LOCALES = [
     code: "EN_US" as LanguageCodeEnum,
     name: "American English",
   },
-  { slug: "pl-PL", code: "PL_PL" as LanguageCodeEnum, name: "Polski" },
+  { slug: "ar-AR", code: "AR_MA" as LanguageCodeEnum, name: "Arabic" },
 ];
 export const DEFAULT_LOCALE = "en-US";
 
@@ -29,9 +29,9 @@ export const DEFAULT_CHANNEL: Channel = {
 export const CHANNELS: Channel[] = [
   DEFAULT_CHANNEL,
   {
-    slug: "channel-pln",
-    name: "Polski Złoty",
-    currencyCode: "PLN",
+    slug: "channel-uae",
+    name: "United Arab Emirates Dirham",
+    currencyCode: "AED",
   },
 ];
 

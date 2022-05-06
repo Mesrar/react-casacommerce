@@ -9,8 +9,8 @@ import createSafeContext from "@/lib/useSafeContext";
 import { formatAsMoney } from "@/lib/util";
 import { LanguageCodeEnum, PriceFragment } from "@/saleor/api";
 
+import * as ar from "../../locale/ar-AR.json";
 import * as sourceOfTruth from "../../locale/en-US.json";
-import * as pl from "../../locale/pl-PL.json";
 
 export interface RegionsConsumerProps {
   channels: Channel[];
@@ -33,8 +33,8 @@ export function importMessages(locale: string): LocaleMessages {
   switch (locale) {
     case "en-US":
       return sourceOfTruth;
-    case "pl-PL":
-      return pl;
+    case "ar-AR":
+      return ar;
     default:
       return sourceOfTruth;
   }

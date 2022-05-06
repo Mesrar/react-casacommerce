@@ -21,8 +21,6 @@ interface StripeCardFormInterface {
 }
 
 function StripeCardForm({ checkout }: StripeCardFormInterface) {
-  const stripe = useStripe();
-  const elements = useElements();
   const { formatPrice } = useRegions();
   const router = useRouter();
   const paths = usePaths();
@@ -37,6 +35,8 @@ function StripeCardForm({ checkout }: StripeCardFormInterface) {
 
     router.push(paths.order.$url());
   };
+  const stripe = useStripe();
+  const elements = useElements();
 
   const handleSubmit = async (event: FormEvent) => {
     event.preventDefault();
@@ -187,11 +187,14 @@ export function StripeCreditCardSection({ checkout }: StripeCreditCardSectionInt
       </div>
     );
   }
-  const stripePromise = loadStripe(stripeApiKey);
+
+  const stripe = loadStripe(
+    "pk_test_51HgwCxDinKWFRUffyL7fqVCl3iO1sZe3Ze9hoqmDrwGemKedxJUuON9UzmsUCPjbSFGsDVQIR8G3uPeQbgeVpZ4x00Jf21zdjY"
+  );
 
   return (
     <div className="py-8">
-      <Elements stripe={stripePromise}>
+      <Elements stripe={stripe}>
         <StripeCardForm checkout={checkout} />
       </Elements>
     </div>
