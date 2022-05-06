@@ -14,6 +14,7 @@ export interface AddressFormData {
   streetAddress1: string;
   city: string;
   postalCode: string;
+  countryArea: string;
 }
 
 export interface AddressFormProps {
@@ -39,6 +40,7 @@ export function AddressForm({
       lastName: existingAddressData?.lastName || "",
       phone: existingAddressData?.phone || "",
       country: "AE",
+      countryArea: "dxb",
       streetAddress1: existingAddressData?.streetAddress1 || "",
       city: existingAddressData?.city || "",
       postalCode: existingAddressData?.postalCode || "",
